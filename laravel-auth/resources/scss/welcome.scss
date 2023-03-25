@@ -1,4 +1,67 @@
+@import './reset.scss', './templates.scss';
 
-.back {
-    background-color: red;
+* {
+    @extend %mainFont;
+}
+
+.welcome-wrapper {
+    .welcome-header {
+        background-color: #262626;
+        width: 100vw;
+        height: 7vh;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        .header__items {
+            width: 20vw;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .header__item {
+            a {
+                @extend %mainFont;
+            }
+        }
+    }
+    
+    .welcome-content {
+        height: 93vh;
+        @extend %blockBackground;
+        background: url('https://images.unsplash.com/photo-1462275646964-a0e3386b89fa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1228&q=80');
+        background-repeat: no-repeat;
+        background-size: cover;
+        @extend %centerTemplate;
+        .welcome__main-block {
+            width: 40%;
+            height: 40%;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-around;
+            @extend %shadowTemplate;
+            h1 {
+                font-size: 23px;
+                color: #434343;
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+            .content-highlight {
+                border: 1px solid #434343;
+                padding: 10px;
+                color: #434343;
+            }
+            .content-highlight:hover {
+                background-color: #1890ff;
+                border: none;
+                color: white;
+                cursor: default;
+            }
+            .versions {
+                color: #434343;
+            }
+        }
+    }
 }

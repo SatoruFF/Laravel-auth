@@ -30,8 +30,8 @@ export default function Register() {
         <GuestLayout>
             <Head title="Register" />
 
-            <form onSubmit={submit}>
-                <div>
+            <form className='main-form' onSubmit={submit}>
+                <div className='form-item'>
                     <InputLabel htmlFor="name" value="Name" />
 
                     <TextInput
@@ -48,7 +48,7 @@ export default function Register() {
                     <InputError message={errors.name} className="mt-2" />
                 </div>
 
-                <div className="mt-4">
+                <div className='form-item'>
                     <InputLabel htmlFor="email" value="Email" />
 
                     <TextInput
@@ -65,7 +65,7 @@ export default function Register() {
                     <InputError message={errors.email} className="mt-2" />
                 </div>
 
-                <div className="mt-4">
+                <div className='form-item'>
                     <InputLabel htmlFor="password" value="Password" />
 
                     <TextInput
@@ -82,7 +82,7 @@ export default function Register() {
                     <InputError message={errors.password} className="mt-2" />
                 </div>
 
-                <div className="mt-4">
+                <div className='form-item'>
                     <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
 
                     <TextInput
@@ -96,10 +96,10 @@ export default function Register() {
                         required
                     />
 
-                    <InputError message={errors.password_confirmation} className="mt-2" />
+                    <InputError message={errors.password_confirmation}/>
                 </div>
 
-                <div className="flex items-center justify-end mt-4">
+                <div className='submit-btn__space'>
                     <Link
                         href={route('login')}
                         className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

@@ -1,0 +1,18 @@
+@import './templates.scss';
+
+.guest-wrapper {
+    @extend %centerTemplate;
+    flex-direction: column;
+    height: 100vh;
+    background-color: white;
+    background: url('https://images.unsplash.com/photo-1529528744093-6f8abeee511d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');
+    background-repeat: no-repeat;
+    background-size: cover;
+    .guest-home {
+        a {
+            text-decoration: none;
+            color: white;
+            font-size: 24px;
+        }
+    }
+}
