@@ -1,0 +1,46 @@
+@import './reset.scss', './templates.scss';
+
+
+.auth-layout-wrapper {
+    width: 100%;
+    height: 100vh;
+    background-color: #fafafa;
+    .auth-layout__header {
+        height: 8vh;
+        background-color: #434343;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        a {
+            margin-right: 35px;
+            color: white;
+            text-decoration: none;
+        }
+    }
+
+    .auth-layout__title {
+        height: 5%;
+        @extend %centerTemplate, %mainFont;
+    }
+
+    .authenticate__main-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        height: 80%;
+        .authenticate__left-side {
+            background-color: #69c0ff;
+            border-radius: 15px;
+            width: 30%;
+            @extend %centerTemplate;
+            flex-direction: column;
+        }
+
+        .authenticate__right-side {
+            border-radius: 15px;
+            width: 60%;
+            background-color: #69c0ff;
+        }
+    }
+}

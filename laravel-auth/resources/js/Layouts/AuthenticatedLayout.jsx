@@ -1,78 +1,67 @@
 import { useState } from "react";
-import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
-import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { Link } from "@inertiajs/react";
-import '../../scss/auth-layout.scss'
+import { Button, Typography, Card, Alert } from "antd";
+import "../../scss/auth-layout.scss";
 
-export default function Authenticated({ user, header, children }) {
-    const [admin, setAdmin] = useState(false);
+const { Text, Paragraph } = Typography;
+
+export default function Authenticated({ user, header, showDrawer, children }) {
+
+
 
     return (
-        <div className="kek">
-            <div>
+        <div className="auth-layout-wrapper">
+            <div className="auth-layout__header">
                 <NavLink
                     href={route("dashboard")}
                     active={route().current("dashboard")}
                 >
-                    Dashboard
+                    <Button type="primary" shape="round">
+                        Dashboard
+                    </Button>
                 </NavLink>
             </div>
 
-            <div>{user.name}</div>
+            {header && <div className="auth-layout__title">Dashboard</div>}
 
-            <Dropdown>
-                <Dropdown.Content>
-                    <Dropdown.Link href={route("profile.edit")}>
-                        Profile
-                    </Dropdown.Link>
-                    <Dropdown.Link
-                        href={route("logout")}
-                        method="post"
-                        as="button"
+            <div className="authenticate__main-content">
+                <div className="authenticate__left-side">
+                    <Card
+                        title="User info"
+                        extra={<a href={route("logout")}>Log out</a>}
+                        style={{ width: 300 }}
                     >
-                        Log Out
-                    </Dropdown.Link>
-                </Dropdown.Content>
-            </Dropdown>
+                        <Typography>
+                            <Paragraph> <Button>{user.name}</Button> </Paragraph>
+                            <Paragraph>{user.email}</Paragraph>
+                            <Paragraph>Role: {user.role}</Paragraph>
+                            <Paragraph>
+                                <Link
+                                    href={route("dashboard")}
+                                    active={route().current("dashboard")}
+                                >
+                                    Dashboard
+                                </Link>
+                            </Paragraph>
+                            
 
-            <ResponsiveNavLink
-                href={route("dashboard")}
-                active={route().current("dashboard")}
-            >
-                Dashboard
-            </ResponsiveNavLink>
 
-            <div className="px-4">
-                <div className="font-medium text-base text-gray-800">
-                    {user.name}
+
+                            <Paragraph>
+                                <Link href={route("profile.edit")} onClick={showDrawer}>
+                                    Edit profile
+                                </Link>
+                            </Paragraph>
+
+                        {children && <Alert message={children} type="success" showIcon />}
+                        </Typography>
+                    </Card>
                 </div>
-                <div className="font-medium text-sm text-gray-500">
-                    {user.email}
+                <div className="authenticate__right-side">
+                    
                 </div>
             </div>
-
-            <div className="mt-3 space-y-1">
-                <ResponsiveNavLink href={route("profile.edit")}>
-                    Profile
-                </ResponsiveNavLink>
-                <ResponsiveNavLink
-                    method="post"
-                    href={route("logout")}
-                    as="button"
-                >
-                    Log Out
-                </ResponsiveNavLink>
-            </div>
-            {header && (
-                <header className="bg-white shadow">
-                    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {header}
-                    </div>
-                </header>
-            )}
-
-            <main>{children}</main>
         </div>
     );
 }

@@ -46,9 +46,10 @@ export default function Login({ status, canResetPassword }) {
                         onChange={(e) => setData('email', e.target.value)}
                     />
 
-                    <InputError message={errors.email} className="mt-2" />
+                    
                 </div>
 
+                <InputError message={errors.email} className="inp-error"/>
                 <div className='form-item'>
                     <InputLabel htmlFor="password" value="Password:" />
 
@@ -57,14 +58,14 @@ export default function Login({ status, canResetPassword }) {
                         type="password"
                         name="password"
                         value={data.password}
-                        className="mt-1 block w-full"
                         autoComplete="current-password"
                         onChange={(e) => setData('password', e.target.value)}
                     />
 
-                    <InputError message={errors.password} className="mt-2" />
+                   
                 </div>
 
+                <InputError message={errors.password} className="inp-error"/>
                 <div>
                     <label className="flex items-center">
                         <Checkbox

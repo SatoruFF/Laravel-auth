@@ -33,7 +33,6 @@ export default function Register() {
             <form className='main-form' onSubmit={submit}>
                 <div className='form-item'>
                     <InputLabel htmlFor="name" value="Name" />
-
                     <TextInput
                         id="name"
                         name="name"
@@ -44,13 +43,11 @@ export default function Register() {
                         onChange={(e) => setData('name', e.target.value)}
                         required
                     />
-
-                    <InputError message={errors.name} className="mt-2" />
                 </div>
+                <InputError message={errors.name} className="inp-error" />
 
                 <div className='form-item'>
                     <InputLabel htmlFor="email" value="Email" />
-
                     <TextInput
                         id="email"
                         type="email"
@@ -61,13 +58,11 @@ export default function Register() {
                         onChange={(e) => setData('email', e.target.value)}
                         required
                     />
-
-                    <InputError message={errors.email} className="mt-2" />
                 </div>
+                <InputError message={errors.email} className="inp-error" />
 
                 <div className='form-item'>
                     <InputLabel htmlFor="password" value="Password" />
-
                     <TextInput
                         id="password"
                         type="password"
@@ -78,9 +73,8 @@ export default function Register() {
                         onChange={(e) => setData('password', e.target.value)}
                         required
                     />
-
-                    <InputError message={errors.password} className="mt-2" />
                 </div>
+                <InputError message={errors.password} className="inp-error" />
 
                 <div className='form-item'>
                     <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
@@ -95,9 +89,8 @@ export default function Register() {
                         onChange={(e) => setData('password_confirmation', e.target.value)}
                         required
                     />
-
-                    <InputError message={errors.password_confirmation}/>
                 </div>
+                <InputError message={errors.password_confirmation} className="inp-error"/>
 
                 <div className='submit-btn__space'>
                     <Link
