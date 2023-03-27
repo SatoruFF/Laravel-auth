@@ -16,7 +16,7 @@ export default function Edit({ auth, mustVerifyEmail, status }) {
 
     const onClose = () => {
         setOpen(false);
-        get(route('/dashboard'))
+        route('dashboard');
     };
 
     return (

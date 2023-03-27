@@ -1,20 +1,30 @@
 import { useState } from "react";
 import NavLink from "@/Components/NavLink";
-import { Link } from "@inertiajs/react";
+import { Link, useForm } from "@inertiajs/react";
 import { Button, Typography, Card, Upload, Alert, Form, Input } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
+import InputError from '@/Components/InputError';
 import "../../scss/auth-layout.scss";
+import PrimaryButton from "@/Components/PrimaryButton";
 
 const { TextArea } = Input;
 const { Text, Paragraph, Title } = Typography;
 
 export default function Authenticated({ user, header, showDrawer, children }) {
+    const { data, setData, post, processing, errors, reset } = useForm({
+        client_id: user.id,
+        client_name: user.name,
+        client_email: user.email,
+        title: "",
+        message: "",
+        file_link: "",
+    });
 
-
-    const sumbit = () => {
-
-    }
-
+    const sumbit = (e) => {
+        alert('kek')
+        e.preventDefault();
+        post(route('dashboard.submit'), data);
+    };
 
     return (
         <div className="auth-layout-wrapper">
@@ -47,7 +57,7 @@ export default function Authenticated({ user, header, showDrawer, children }) {
 
                             <Paragraph>
                                 <Link
-                                    href={route("dashboard")}
+                                    href={route("profile.edit")}
                                     onClick={showDrawer}
                                 >
                                     Edit profile
@@ -72,11 +82,11 @@ export default function Authenticated({ user, header, showDrawer, children }) {
                         <div className="client-dashboard">
 
 
-
                             <Form
                                 className="upd-form"
                                 layout="horizontal"
                                 onSubmit={sumbit}
+                                htmlType="form"
                             >
                                 <Title level={3}>Send your data to admin</Title>
                                 <Form.Item
@@ -89,11 +99,39 @@ export default function Authenticated({ user, header, showDrawer, children }) {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                    <Input
+                                        id="title"
+                                        type="text"
+                                        name="titlt"
+                                        value={data.title}
+                                        autoComplete="title"
+                                        onChange={(e) =>
+                                            setData("title", e.target.value)
+                                        }
+                                    />
                                 </Form.Item>
+                                <InputError
+                                    message={errors.title}
+                                    className="inp-error"
+                                />
+
                                 <Form.Item label="TextArea">
-                                    <TextArea rows={4} />
+                                    <TextArea
+                                        rows={4}
+                                        id="message"
+                                        type="text"
+                                        name="message"
+                                        value={data.message}
+                                        autoComplete="message"
+                                        onChange={(e) =>
+                                            setData("message", e.target.value)
+                                        }
+                                    />
                                 </Form.Item>
+                                <InputError
+                                    message={errors.message}
+                                    className="inp-error"
+                                />
                                 <Form.Item
                                     label="Upload"
                                     valuePropName="fileList"
@@ -107,10 +145,13 @@ export default function Authenticated({ user, header, showDrawer, children }) {
                                         <p>Upload</p>
                                     </Upload>
                                 </Form.Item>
-                                <Button type="primary" shape="round">
+
+                                <Button htmlType="submit" disabled={processing} type="primary">
                                     submit
                                 </Button>
+
                             </Form>
+
 
 
                         </div>

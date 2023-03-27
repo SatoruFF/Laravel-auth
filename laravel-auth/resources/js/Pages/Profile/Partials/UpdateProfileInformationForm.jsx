@@ -19,7 +19,6 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status }) {
 
     const submit = (e) => {
         e.preventDefault();
-
         patch(route("profile.edit"));
     };
 
@@ -98,7 +97,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status }) {
                     )}
 
                     <div>
-                        <PrimaryButton disabled={processing}>
+                        <PrimaryButton type="submit" disabled={processing}>
                             Save
                         </PrimaryButton>
 
@@ -106,9 +105,8 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status }) {
                             show={recentlySuccessful}
                             enterFrom="opacity-0"
                             leaveTo="opacity-0"
-                            className="transition ease-in-out"
                         >
-                            <p className="text-sm text-gray-600">Saved.</p>
+                            <p>Saved.</p>
                         </Transition>
                     </div>
                 </Form>
