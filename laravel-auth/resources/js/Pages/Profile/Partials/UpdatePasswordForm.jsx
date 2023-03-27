@@ -30,7 +30,7 @@ export default function UpdatePasswordForm() {
     const updatePassword = (e) => {
         e.preventDefault();
 
-        put(route("dashboard"), {
+        put(route("profile.update"), {
             preserveScroll: true,
             onSuccess: () => reset(),
             onError: (errors) => {

@@ -62,3 +62,12 @@ export default function Edit({ auth, mustVerifyEmail, status }) {
         </AuthenticatedLayout>
     );
 }
+
+                            {/* <Paragraph>
+                                <Link
+                                    href={route("dashboard")}
+                                    active={route().current("dashboard")}
+                                >
+                                    Dashboard
+                                </Link>
+                            </Paragraph> */}

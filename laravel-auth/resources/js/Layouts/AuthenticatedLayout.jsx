@@ -44,14 +44,6 @@ export default function Authenticated({ user, header, showDrawer, children }) {
                             </Paragraph>
                             <Paragraph>{user.email}</Paragraph>
                             <Paragraph>Role: {user.role}</Paragraph>
-                            {/* <Paragraph>
-                                <Link
-                                    href={route("dashboard")}
-                                    active={route().current("dashboard")}
-                                >
-                                    Dashboard
-                                </Link>
-                            </Paragraph> */}
 
                             <Paragraph>
                                 <Link
@@ -73,7 +65,9 @@ export default function Authenticated({ user, header, showDrawer, children }) {
                 </div>
                 <div className="authenticate__right-side">
                     {user.role == "ADMIN" ? (
-                        <div className="admin-dashboard">Hi admin</div>
+                        <div className="admin-dashboard">
+                            <div className="admin-title">All requests</div>
+                        </div>
                     ) : (
                         <div className="client-dashboard">
 
@@ -119,8 +113,6 @@ export default function Authenticated({ user, header, showDrawer, children }) {
                             </Form>
 
 
-
-                            
                         </div>
                     )}
                 </div>

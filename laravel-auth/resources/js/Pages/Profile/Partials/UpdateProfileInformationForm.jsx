@@ -20,7 +20,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status }) {
     const submit = (e) => {
         e.preventDefault();
 
-        patch(route("dashboard"));
+        patch(route("profile.edit"));
     };
 
     return (
