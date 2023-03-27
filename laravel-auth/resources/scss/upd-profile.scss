@@ -1,0 +1,35 @@
+@import './reset.scss', './templates.scss';
+
+.update-profile-info__wrapper {
+    .upd-form {
+        @extend %formTemplate;
+        .form-item__label {
+            margin-right: 10px;
+        }
+    }
+}
+
+.update-password__wrapper {
+    .upd-form {
+        @extend %formTemplate;
+        .form-item__label {
+            margin-right: 10px;
+        }
+    }
+}
+
+.delete-user__wrapper {
+    .upd-header {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.delete-user__modal {
+    .upd-form {
+        @extend %formTemplate;
+        .form-item__label {
+            margin-right: 10px;
+        }
+    }
+}

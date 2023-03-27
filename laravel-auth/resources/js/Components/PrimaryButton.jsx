@@ -1,8 +1,8 @@
 import { Button } from 'antd';
 
-export default function PrimaryButton({classname='', children, props, disabled}) {
+export default function PrimaryButton({ children, props, disabled}) {
     return (
-        <Button {...props} className={`submit-btn ${disabled}` + classname} disabled={disabled} htmlType="submit">
+        <Button {...props} disabled={disabled} htmlType="submit">
             {children}
         </Button>
     );
