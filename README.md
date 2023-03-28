@@ -12,4 +12,9 @@
 * Ant design
 * Inertia js
 * sass/scss
-* postgreSQL
+* postgresSL
+
+### Run project:
+
+* npm run dev (in root directory)
+* php artisan serve
