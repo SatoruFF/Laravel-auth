@@ -71,3 +71,10 @@ export default function Edit({ auth, mustVerifyEmail, status }) {
                                     Dashboard
                                 </Link>
                             </Paragraph> */}
+
+// # DB_CONNECTION=pgsql
+// # DB_HOST=localhost
+// # DB_PORT=5432
+// # DB_DATABASE=laravel-auth
+// # DB_USERNAME=SatoruF
+// # DB_PASSWORD=5352

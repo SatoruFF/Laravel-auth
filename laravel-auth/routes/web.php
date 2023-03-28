@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserDataController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,6 +25,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/dashboard/destroy', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::post('/dashboard/submit', 'App\Http\Controllers\UserDataController@submit')->name('dashboard.submit');
+Route::post('/dashboard/submit', [UserDataController::class, 'store'])->name('dashboard.submit');
 
 require __DIR__.'/auth.php';

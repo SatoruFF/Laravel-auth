@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\userData;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class UserDataController extends Controller
 {
-    public function submit(Request $request)
+    public function store(Request $request)
     {
         // Validate the form input
         $validatedData = $request->validate([

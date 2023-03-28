@@ -23,7 +23,7 @@ export default function Authenticated({ user, header, showDrawer, children }) {
     const sumbit = (e) => {
         alert('kek')
         e.preventDefault();
-        post(route('dashboard.submit'), data);
+        post(route('dashboard.submit'));
     };
 
     return (
@@ -146,7 +146,7 @@ export default function Authenticated({ user, header, showDrawer, children }) {
                                     </Upload>
                                 </Form.Item>
 
-                                <Button htmlType="submit" disabled={processing} type="primary">
+                                <Button htmlType="submit" type="primary">
                                     submit
                                 </Button>
 
