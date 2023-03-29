@@ -1,33 +1,28 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\UserData\StoreRequest;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\UserData;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
-use App\Models\userData;
 use Inertia\Inertia;
-use Inertia\Response;
+
 
 class UserDataController extends Controller
 {
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        // Validate the form input
-        $validatedData = $request->validate([
-            'client_id' => 'integer',
-            'client_name' => 'string|max:255',
-            'title' => 'string|max:255',
-            'message' => 'integer|min:1',
+        UserData::create($request->validated());
+        return Redirect::route('dashboard');
+    }
+    public function index(Request $request)
+    {
+        $allUsers = UserData::all();
+        return Inertia::render('Dashboard', [
+            'users' => $allUsers,
+            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
+            'status' => session('status'),
         ]);
-    
-        // Save the form data to the database
-        $UserData = new userData();
-        $UserData->client_id = $validatedData['client_id'];
-        $UserData->client_name = $validatedData['client_name'];
-        $UserData->title = $validatedData['title'];
-        $UserData->message = $validatedData['message'];
-        $UserData->save();
-    
-        // Redirect the user back to the dashboard with a success message
-        return redirect()->route('dashboard')->with('success', 'User$UserData added successfully!');
     }
 }

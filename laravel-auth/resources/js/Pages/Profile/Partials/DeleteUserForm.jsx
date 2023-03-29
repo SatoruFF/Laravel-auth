@@ -30,13 +30,14 @@ export default function DeleteUserForm({ className = "" }) {
 
     const deleteUser = (e) => {
         e.preventDefault();
+        alert('delete')
 
-        destroy(route("profile.destroy"), {
-            preserveScroll: true,
-            onSuccess: () => closeModal(),
-            onError: () => passwordInput.current.focus(),
-            onFinish: () => reset(),
-        });
+        // destroy(route("profile.destroy"), {
+        //     preserveScroll: true,
+        //     onSuccess: () => closeModal(),
+        //     onError: () => passwordInput.current.focus(),
+        //     onFinish: () => reset(),
+        // });
     };
 
     const closeModal = () => {
@@ -81,7 +82,7 @@ export default function DeleteUserForm({ className = "" }) {
                     </Paragraph>
                 </Typography>
 
-                <Form onSubmit={deleteUser} className="upd-form">
+                <form onSubmit={deleteUser} className="upd-form">
                     <Form.Item className="mt-6">
                         <InputLabel
                             htmlFor="password"
@@ -113,11 +114,11 @@ export default function DeleteUserForm({ className = "" }) {
                             Cancel
                         </SecondaryButton> */}
 
-                        <DangerButton disabled={processing}>
+                        <DangerButton htmlType="submit" disabled={processing}>
                             Delete Account
                         </DangerButton>
                     </div>
-                </Form>
+                </form>
             </Modal>
         </section>
     );

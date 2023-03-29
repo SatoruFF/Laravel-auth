@@ -29,22 +29,23 @@ export default function UpdatePasswordForm() {
 
     const updatePassword = (e) => {
         e.preventDefault();
+        alert('upd pass')
 
-        put(route("profile.update"), {
-            preserveScroll: true,
-            onSuccess: () => reset(),
-            onError: (errors) => {
-                if (errors.password) {
-                    reset("password", "password_confirmation");
-                    passwordInput.current.focus();
-                }
+        // put(route("profile.update"), {
+        //     preserveScroll: true,
+        //     onSuccess: () => reset(),
+        //     onError: (errors) => {
+        //         if (errors.password) {
+        //             reset("password", "password_confirmation");
+        //             passwordInput.current.focus();
+        //         }
 
-                if (errors.current_password) {
-                    reset("current_password");
-                    currentPasswordInput.current.focus();
-                }
-            },
-        });
+        //         if (errors.current_password) {
+        //             reset("current_password");
+        //             currentPasswordInput.current.focus();
+        //         }
+        //     },
+        // });
     };
 
     return (
@@ -60,7 +61,7 @@ export default function UpdatePasswordForm() {
                 </Typography>
             </div>
 
-            <Form onSubmit={updatePassword} className="upd-form">
+            <form onSubmit={updatePassword} className="upd-form">
                 <Form.Item className="upd-form__item">
                     <InputLabel
                         htmlFor="current_password"
@@ -139,7 +140,7 @@ export default function UpdatePasswordForm() {
                         <p className="text-sm text-gray-600">Saved.</p>
                     </Transition>
                 </div>
-            </Form>
+            </form>
         </section>
     );
 }

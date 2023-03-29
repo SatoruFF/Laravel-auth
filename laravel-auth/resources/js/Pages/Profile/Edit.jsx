@@ -10,6 +10,7 @@ export default function Edit({ auth, mustVerifyEmail, status }) {
     const [open, setOpen] = useState(false);
 
     const showDrawer = (e) => {
+        alert("kek")
         e.preventDefault();
         setOpen(true);
     };

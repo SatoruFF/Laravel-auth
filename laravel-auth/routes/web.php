@@ -15,16 +15,12 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [UserDataController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/dashboard/update', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/dashboard/destroy', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::patch('/dashboard', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/dashboard', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/dashboard', [UserDataController::class, 'store'])->name('dashboard.submit');
 });
-
-Route::post('/dashboard/submit', [UserDataController::class, 'store'])->name('dashboard.submit');
 
 require __DIR__.'/auth.php';

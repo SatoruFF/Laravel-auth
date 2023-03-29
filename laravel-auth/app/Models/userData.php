@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class userData extends Model
+class UserData extends Model
 {
-    use HasFactory;
-    protected $table = 'userData';
+    protected $guarded = false;
+    protected $table = 'user_data';
 }

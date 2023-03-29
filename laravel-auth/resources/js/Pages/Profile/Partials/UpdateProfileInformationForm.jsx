@@ -18,8 +18,9 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status }) {
         });
 
     const submit = (e) => {
+        alert('update')
         e.preventDefault();
-        patch(route("profile.edit"));
+        // patch(route("profile.edit"));
     };
 
     return (
@@ -36,7 +37,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status }) {
             </div>
 
             <section>
-                <Form onSubmit={submit} className="upd-form">
+                <form onSubmit={submit} className="upd-form">
                     <Form.Item className="upd-form__item">
                         <InputLabel
                             htmlFor="name"
@@ -109,7 +110,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status }) {
                             <p>Saved.</p>
                         </Transition>
                     </div>
-                </Form>
+                </form>
             </section>
         </div>
     );

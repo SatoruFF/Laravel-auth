@@ -30,17 +30,27 @@
         justify-content: space-around;
         height: 80%;
         .authenticate__left-side {
-            background-color: #69c0ff;
+            background-color: #40a9ff;
             border-radius: 15px;
             width: 30%;
             @extend %centerTemplate;
             flex-direction: column;
+            .profile-info__card {
+                width: 90%;
+                height: 90%;
+                .profile-info__text {
+                    height: 400px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                }
+            }
         }
 
         .authenticate__right-side {
             border-radius: 15px;
             width: 60%;
-            background-color: #69c0ff;
+            background-color: #40a9ff;
             @extend %centerTemplate;
             .client-dashboard {
                 .client-upload {
@@ -54,6 +64,44 @@
                     .form-item__label {
                         margin-right: 10px;
                     }
+                }
+            }
+            .admin-dashboard {
+                height: 100%;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                .admin-title {
+                    height: 10%;
+                    width: 100%;
+                    color: white;
+                    font-size: 23px;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    p {
+                        margin-right: 30px;
+                    }
+                }
+                .admin__user-list {
+                    height: 80%;
+                    background-color: #ffd6e7;
+                    border-radius: 15px;
+                    width: 90%;
+                    padding: 15px;
+                    overflow: hidden;
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                }
+                .admin-pagination {
+                    height: 10%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                 }
             }
         }

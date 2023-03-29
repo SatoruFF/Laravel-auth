@@ -2,6 +2,7 @@ import { Link, Head } from '@inertiajs/react';
 import { Button } from 'antd';
 import '../../scss/welcome.scss'
 import 'animate.css';
+import { useEffect } from 'react';
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
     return (

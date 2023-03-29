@@ -78,3 +78,121 @@ export default function Edit({ auth, mustVerifyEmail, status }) {
 // # DB_DATABASE=laravel-auth
 // # DB_USERNAME=SatoruF
 // # DB_PASSWORD=5352
+
+// <?php
+
+// namespace App\Models;
+
+// use Illuminate\Database\Eloquent\Factories\HasFactory;
+// use Illuminate\Database\Eloquent\Model;
+
+// class userData extends Model
+// {
+//     use HasFactory;
+//     protected $table = 'userData';
+// }
+
+
+// <?php
+
+// namespace App\Http\Controllers;
+
+// use Illuminate\Http\Request;
+// use App\Models\userData;
+// use Inertia\Inertia;
+// use Inertia\Response;
+
+// class UserDataController extends Controller
+// {
+    // public function store(Request $request)
+    // {
+    //     // Validate the form input
+    //     $validatedData = $request->validate([
+    //         'client_id' => 'integer',
+    //         'client_name' => 'string|max:255',
+    //         'title' => 'string|max:255',
+    //         'message' => 'integer|min:1',
+    //     ]);
+    
+    //     // Save the form data to the database
+    //     $UserData = new userData();
+    //     $UserData->client_id = $validatedData['client_id'];
+    //     $UserData->client_name = $validatedData['client_name'];
+    //     $UserData->title = $validatedData['title'];
+    //     $UserData->message = $validatedData['message'];
+    //     $UserData->save();
+    
+    //     // Redirect the user back to the dashboard with a success message
+    //     return redirect()->route('dashboard')->with('success', 'User$UserData added successfully!');
+    // }
+// }
+
+
+// <?php
+
+// use Illuminate\Database\Migrations\Migration;
+// use Illuminate\Database\Schema\Blueprint;
+// use Illuminate\Support\Facades\Schema;
+
+// return new class extends Migration
+// {
+//     /**
+//      * Run the migrations.
+//      */
+//     public function up(): void
+//     {
+//         Schema::create('userData', function (Blueprint $table) {
+            // $table->id();
+            // $table->integer('client_id');
+            // $table->string('client_name');
+            // $table->string('client_email');
+            // $table->string('title');
+            // $table->text('message');
+            // $table->text('file_link');
+            // $table->timestamps();
+//         });
+//     }
+
+//     /**
+//      * Reverse the migrations.
+//      */
+//     public function down(): void
+//     {
+//         Schema::dropIfExists('userData');
+//     }
+// };
+
+
+                                {/* <Link
+                                    href={route("profile.edit")}
+                                    onClick={showDrawer}
+                                >
+                                    Edit profile
+                                </Link> */}
+
+
+                                        // Validate the form input
+        // $validatedData = $request->validate([
+        //     'client_name' => 'string|max:255',
+        //     'client_email' => 'string|max:255',
+        //     'title' => 'string|max:255',
+        //     'message' => 'string',
+        //     'file_link' => 'string|max:255',
+        // ]);
+    
+        // // Save the form data to the database
+        // $UserData = new UserData();
+        // $UserData->client_id = $request->input('client_id');
+        // $UserData->client_name = $validatedData['client_name'];
+        // $UserData->client_email = $validatedData['client_email'];
+        // $UserData->title = $validatedData['title'];
+        // $UserData->message = $validatedData['message'];
+        // $UserData->file_link = $validatedData['file_link'];
+        // $UserData->save();
+    
+        // // Redirect the user back to the dashboard with a success message
+        // return redirect()->route('dashboard')->with('success', 'User$UserData added successfully!');
+
+
+
+    //Route::get('/dashboard/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
