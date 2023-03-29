@@ -30,14 +30,14 @@ export default function DeleteUserForm({ className = "" }) {
 
     const deleteUser = (e) => {
         e.preventDefault();
-        alert('delete')
+        alert("delete");
 
-        // destroy(route("profile.destroy"), {
-        //     preserveScroll: true,
-        //     onSuccess: () => closeModal(),
-        //     onError: () => passwordInput.current.focus(),
-        //     onFinish: () => reset(),
-        // });
+        destroy(route("profile.destroy"), {
+            preserveScroll: true,
+            onSuccess: () => closeModal(),
+            onError: () => passwordInput.current.focus(),
+            onFinish: () => reset(),
+        });
     };
 
     const closeModal = () => {
@@ -50,13 +50,14 @@ export default function DeleteUserForm({ className = "" }) {
         <section className="delete-user__wrapper">
             <div className="upd-header">
                 <Typography>
-                    <Title level={3}>Delete Account</Title>
+                    <Title level={3}>Удалить аккаунт</Title>
                     <Divider />
                     <Paragraph>
-                        Once your account is deleted, all of its resources and
-                        data will be permanently deleted. Before deleting your
-                        account, please download any data or information that
-                        you wish to retain.
+                        Как только ваша учетная запись будет удалена, все ее
+                        ресурсы и данные будут удалены безвозвратно. Перед
+                        удалением вашего учетная запись, пожалуйста, загрузите
+                        любые данные или информацию, которые вы хотите
+                        сохранить.
                     </Paragraph>
                 </Typography>
                 <DangerButton onClick={confirmUserDeletion}>
@@ -72,13 +73,13 @@ export default function DeleteUserForm({ className = "" }) {
             >
                 <Typography>
                     <Title level={2}>
-                        Are you sure you want to delete your account?
+                        Вы уверены, что хотите удалить свою учетную запись?
                     </Title>
                     <Paragraph>
-                        Once your account is deleted, all of its resources and
-                        data will be permanently deleted. Please enter your
-                        password to confirm you would like to permanently delete
-                        your account.
+                        Как только ваша учетная запись будет удалена, все ее
+                        ресурсы и данные будут удалены безвозвратно. Пожалуйста,
+                        введите свой пароль для подтверждения, который вы хотели
+                        бы удалить безвозвратно ваша учетная запись.
                     </Paragraph>
                 </Typography>
 
@@ -86,7 +87,7 @@ export default function DeleteUserForm({ className = "" }) {
                     <Form.Item className="mt-6">
                         <InputLabel
                             htmlFor="password"
-                            value="Password"
+                            value="Пароль:"
                             className="form-item__label"
                         />
 
@@ -105,17 +106,13 @@ export default function DeleteUserForm({ className = "" }) {
                         />
                     </Form.Item>
                     <InputError
-                            message={errors.password}
-                            className="inp-error"
-                        />
+                        message={errors.password}
+                        className="inp-error"
+                    />
 
                     <div>
-                        {/* <SecondaryButton onClick={closeModal}>
-                            Cancel
-                        </SecondaryButton> */}
-
                         <DangerButton htmlType="submit" disabled={processing}>
-                            Delete Account
+                            Удалить
                         </DangerButton>
                     </div>
                 </form>

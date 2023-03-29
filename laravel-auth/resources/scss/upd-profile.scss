@@ -1,6 +1,11 @@
 @import './reset.scss', './templates.scss';
 
 .update-profile-info__wrapper {
+    .saved-notifiaction {
+        color: #52c41a;
+        @extend %centerTemplate;
+        flex-direction: column;
+    }
     .upd-form {
         @extend %formTemplate;
         .form-item__label {
@@ -10,6 +15,11 @@
 }
 
 .update-password__wrapper {
+    .saved-notifiaction {
+        color: #52c41a;
+        @extend %centerTemplate;
+        flex-direction: column;
+    }
     .upd-form {
         @extend %formTemplate;
         .form-item__label {
@@ -19,6 +29,11 @@
 }
 
 .delete-user__wrapper {
+    .saved-notifiaction {
+        color: #52c41a;
+        @extend %centerTemplate;
+        flex-direction: column;
+    }
     .upd-header {
         display: flex;
         flex-direction: column;
@@ -26,6 +41,11 @@
 }
 
 .delete-user__modal {
+    .saved-notifiaction {
+        color: #52c41a;
+        @extend %centerTemplate;
+        flex-direction: column;
+    }
     .upd-form {
         @extend %formTemplate;
         .form-item__label {

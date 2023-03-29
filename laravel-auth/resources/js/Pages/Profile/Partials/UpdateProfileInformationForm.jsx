@@ -18,20 +18,20 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status }) {
         });
 
     const submit = (e) => {
-        alert('update')
         e.preventDefault();
-        // patch(route("profile.edit"));
+        //patch(route("profile.edit"));
+        patch(route("dashboard"));
     };
 
     return (
         <div className="update-profile-info__wrapper">
             <div className="upd-header">
                 <Typography>
-                    <Title>Profile Information</Title>
+                    <Title>Информация о пользователе</Title>
                     <Divider />
                     <Paragraph>
-                        Update your account's profile information and email
-                        address.
+                        Обновите информацию профиля вашей учетной записи и адрес
+                        электронной почты адрес.
                     </Paragraph>
                 </Typography>
             </div>
@@ -41,7 +41,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status }) {
                     <Form.Item className="upd-form__item">
                         <InputLabel
                             htmlFor="name"
-                            value="Name"
+                            value="Имя:"
                             className="form-item__label"
                         />
 
@@ -97,9 +97,9 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status }) {
                         </div>
                     )}
 
-                    <div>
+                    <div className="saved-notifiaction">
                         <PrimaryButton type="submit" disabled={processing}>
-                            Save
+                            Сохранить
                         </PrimaryButton>
 
                         <Transition
@@ -107,7 +107,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status }) {
                             enterFrom="opacity-0"
                             leaveTo="opacity-0"
                         >
-                            <p>Saved.</p>
+                            <p>сохранено.</p>
                         </Transition>
                     </div>
                 </form>

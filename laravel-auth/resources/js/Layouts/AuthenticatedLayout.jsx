@@ -10,6 +10,7 @@ import {
     Form,
     Input,
     Pagination,
+    Divider,
 } from "antd";
 import { PlusOutlined, FilterFilled } from "@ant-design/icons";
 import InputError from "@/Components/InputError";
@@ -17,6 +18,7 @@ import "../../scss/auth-layout.scss";
 import PrimaryButton from "@/Components/PrimaryButton";
 import Footer from "@/Components/Footer";
 import { Spin } from "antd";
+import Edit from "@/Pages/Profile/Edit";
 
 const { TextArea } = Input;
 const { Text, Paragraph, Title } = Typography;
@@ -24,12 +26,13 @@ const { Text, Paragraph, Title } = Typography;
 export default function Authenticated({
     user,
     header,
-    showDrawer,
     children,
     allUsers,
+    mustVerifyEmail,
+    status,
+    auth,
 }) {
-    // Custom not done
-    const { data, setData, post, processing, errors } = useForm({
+    const { data, setData, post, processing, errors, reset } = useForm({
         client_id: user.id,
         client_name: user.name,
         client_email: user.email,
@@ -38,10 +41,30 @@ export default function Authenticated({
         file_link: "",
     });
 
+    const [open, setOpen] = useState(false);
+
+    const showDrawer = (e) => {
+        e.preventDefault();
+        setOpen(true);
+    };
+
+    const onClose = () => {
+        setOpen(false);
+        route('dashboard');
+    };
+
     const sumbitData = (e) => {
         e.preventDefault();
-        post(route("dashboard.submit"));
-        alert("Сообщение отправлено!");
+        post(route("dashboard.submit"), {
+            onSuccess: () => {
+                alert('Успешно!');
+                reset('title', 'message');
+            },
+            onError: () => {
+                alert("Что-то пошло не так")
+            },
+        });
+        
     };
 
     return (
@@ -57,13 +80,13 @@ export default function Authenticated({
                 </NavLink>
             </div>
 
-            {header && <div className="auth-layout__title">Dashboard</div>}
+            {header && <div className="auth-layout__title">Дашборд</div>}
 
             <div className="authenticate__main-content">
                 <div className="authenticate__left-side">
                     <Card
-                        title="User info"
-                        extra={<a href={route("logout")}>Log out</a>}
+                        title="Информация о пользователе"
+                        extra={<a href={route("logout")}>Выход</a>}
                         className="profile-info__card"
                     >
                         <Typography className="profile-info__text">
@@ -71,27 +94,24 @@ export default function Authenticated({
                                 <Button>{user.name}</Button>
                             </Paragraph>
                             <Paragraph>{user.email}</Paragraph>
-                            <Paragraph>Role: {user.role}</Paragraph>
+                            <Paragraph>Роль: {user.role}</Paragraph>
 
                             <Paragraph>
-                                {/* <Link
-                                    //href={route("profile.edit")}
-                                    href={route("dashboard")}
-                                    onClick={showDrawer}
-                                >
-                                    Edit profile
-                                </Link> */}
                                 <Button
                                     type="primary"
                                     onClick={showDrawer}
-                                    style={{color: "white"}}
+                                    style={{ color: "white" }}
                                 >
-                                    Edit profile
+                                    Редактировать профиль
                                 </Button>
                             </Paragraph>
 
+
+                            <Edit mustVerifyEmail={mustVerifyEmail} open={open} auth={auth} status={status} onClose={onClose}/>
+
+
                             <Alert
-                                message="You're logged in!"
+                                message="Вы успешно вошли!"
                                 type="success"
                                 showIcon
                             />
@@ -103,8 +123,7 @@ export default function Authenticated({
                     {user.role == "ADMIN" ? (
                         <div className="admin-dashboard">
                             <div className="admin-title">
-                                <p>All requests</p>
-                                <FilterFilled />
+                                <p>Все запросы:</p>
                             </div>
                             <div className="admin__user-list">
                                 {allUsers ? (
@@ -121,24 +140,34 @@ export default function Authenticated({
                                                 file_link,
                                             }) => (
                                                 <Card
-                                                    title={title}
-                                                    style={{
-                                                        width: 250,
-                                                        maxHeight: 300,
-                                                    }}
+                                                    title={"Тема:" + title}
+                                                    className="main-user-card"
                                                     key={Math.random()}
                                                 >
-                                                    <p>
-                                                        user: {client_name}, id:{" "}
-                                                        {client_id}, account
-                                                        createAt: {created_at},
-                                                        request time:{" "}
-                                                        {updated_at}
+                                                    <p className="name">
+                                                        {client_name} id:
+                                                        {client_id}
                                                     </p>
-                                                    <p>email: {client_email}</p>
-                                                    <p>message: {message}</p>
+                                                    <p className="mess">
+                                                        сообщение: {message}
+                                                    </p>
                                                     <p>
-                                                        file link: {file_link}
+                                                        <p>
+                                                            Аккаунт создан:{" "}
+                                                            {created_at}
+                                                        </p>
+                                                        <p>
+                                                            Время отправки:{" "}
+                                                            {updated_at}
+                                                        </p>
+                                                        <p>
+                                                            email:{" "}
+                                                            {client_email}
+                                                        </p>
+                                                        <p>
+                                                            Ссылка на файл:{" "}
+                                                            {file_link}
+                                                        </p>
                                                     </p>
                                                 </Card>
                                             )
@@ -163,10 +192,10 @@ export default function Authenticated({
                                 onSubmit={sumbitData}
                                 htmlType="form"
                             >
-                                <Title level={3}>Send your data to admin</Title>
+                                <Title level={3}>Отправить запрос модератору:</Title>
                                 <Form.Item
-                                    label="Title"
-                                    name="Title"
+                                    label="Заголовок"
+                                    name="title"
                                     rules={[
                                         {
                                             required: true,
@@ -177,7 +206,7 @@ export default function Authenticated({
                                     <Input
                                         id="title"
                                         type="text"
-                                        name="titlt"
+                                        name="title"
                                         value={data.title}
                                         autoComplete="title"
                                         onChange={(e) =>
@@ -190,7 +219,7 @@ export default function Authenticated({
                                     className="inp-error"
                                 />
 
-                                <Form.Item label="TextArea">
+                                <Form.Item label="Сообщение:">
                                     <TextArea
                                         rows={4}
                                         id="message"

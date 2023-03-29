@@ -18,7 +18,7 @@ Route::get('/', function () {
 Route::get('/dashboard', [UserDataController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::patch('/dashboard', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/dashboard', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/dashboard', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/dashboard', [UserDataController::class, 'store'])->name('dashboard.submit');
 });

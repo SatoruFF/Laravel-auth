@@ -13,8 +13,12 @@ class UserDataController extends Controller
 {
     public function store(StoreRequest $request)
     {
-        UserData::create($request->validated());
-        return Redirect::route('dashboard');
+        try {
+            UserData::create($request->validated());
+            return Redirect::route('dashboard')->with('success', 'User has been created successfully!');
+        } catch (\Exception $e) {
+            return Redirect::back()->withErrors(['error' => 'Unable to create user.']);
+        }
     }
     public function index(Request $request)
     {

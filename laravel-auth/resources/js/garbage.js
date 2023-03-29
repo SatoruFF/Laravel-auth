@@ -196,3 +196,21 @@ export default function Edit({ auth, mustVerifyEmail, status }) {
 
 
     //Route::get('/dashboard/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+
+
+            // <AuthenticatedLayout
+        //     showDrawer={showDrawer}
+        //     user={auth.user}
+        //     header={<h2>Profile</h2>}
+        // >
+        //     <Head title="Profile" />
+                // </AuthenticatedLayout>
+
+
+                                                {/* <Link
+                                    //href={route("profile.edit")}
+                                    href={route("dashboard")}
+                                    onClick={showDrawer}
+                                >
+                                    Edit profile
+                                </Link> */}

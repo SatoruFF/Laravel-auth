@@ -29,34 +29,35 @@ export default function UpdatePasswordForm() {
 
     const updatePassword = (e) => {
         e.preventDefault();
-        alert('upd pass')
+        alert("upd pass");
 
-        // put(route("profile.update"), {
-        //     preserveScroll: true,
-        //     onSuccess: () => reset(),
-        //     onError: (errors) => {
-        //         if (errors.password) {
-        //             reset("password", "password_confirmation");
-        //             passwordInput.current.focus();
-        //         }
+        put(route("profile.update"), {
+            preserveScroll: true,
+            onSuccess: () => reset(),
+            onError: (errors) => {
+                if (errors.password) {
+                    reset("password", "password_confirmation");
+                    passwordInput.current.focus();
+                }
 
-        //         if (errors.current_password) {
-        //             reset("current_password");
-        //             currentPasswordInput.current.focus();
-        //         }
-        //     },
-        // });
+                if (errors.current_password) {
+                    reset("current_password");
+                    currentPasswordInput.current.focus();
+                }
+            },
+        });
     };
 
     return (
         <section className="update-password__wrapper">
             <div className="upd-header">
                 <Typography>
-                    <Title level={3}>Update Password</Title>
+                    <Title level={3}>Обновить пароль</Title>
                     <Divider />
                     <Paragraph>
-                        Ensure your account is using a long, random password to
-                        stay secure.
+                        Убедитесь, что в вашей учетной записи используется
+                        длинный случайный пароль, чтобы оставаться в
+                        безопасности.
                     </Paragraph>
                 </Typography>
             </div>
@@ -65,7 +66,7 @@ export default function UpdatePasswordForm() {
                 <Form.Item className="upd-form__item">
                     <InputLabel
                         htmlFor="current_password"
-                        value="Current Password"
+                        value="Текущий пароль:"
                         className="form-item__label"
                     />
 
@@ -89,7 +90,7 @@ export default function UpdatePasswordForm() {
                 <Form.Item className="upd-form__item">
                     <InputLabel
                         htmlFor="password"
-                        value="New Password"
+                        value="Новый пароль:"
                         className="form-item__label"
                     />
 
@@ -108,7 +109,7 @@ export default function UpdatePasswordForm() {
                 <Form.Item className="upd-form__item">
                     <InputLabel
                         htmlFor="password_confirmation"
-                        value="Confirm Password"
+                        value="Подтверждение"
                         className="form-item__label"
                     />
 
@@ -129,7 +130,7 @@ export default function UpdatePasswordForm() {
                 />
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                    <PrimaryButton disabled={processing}>Сохранить</PrimaryButton>
 
                     <Transition
                         show={recentlySuccessful}
@@ -137,7 +138,7 @@ export default function UpdatePasswordForm() {
                         leaveTo="opacity-0"
                         className="transition ease-in-out"
                     >
-                        <p className="text-sm text-gray-600">Saved.</p>
+                        <p className="saved-notifiaction">Сохранено.</p>
                     </Transition>
                 </div>
             </form>
