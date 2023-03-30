@@ -28,6 +28,7 @@ class StoreRequest extends FormRequest
             'title' => 'required|string|max:255',
             'message' => 'nullable|string',
             'file_link' => 'nullable|string',
+            //'file' => 'nullable|file|max:3072',
         ];
     }
 }

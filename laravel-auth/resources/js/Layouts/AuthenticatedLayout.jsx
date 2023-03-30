@@ -19,6 +19,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import Footer from "@/Components/Footer";
 import { Spin } from "antd";
 import Edit from "@/Pages/Profile/Edit";
+import Dashboard from "@/Pages/Dashboard";
 
 const { TextArea } = Input;
 const { Text, Paragraph, Title } = Typography;
@@ -39,9 +40,25 @@ export default function Authenticated({
         title: "",
         message: "",
         file_link: "",
+        // file: {
+        //     value: null,
+        //     maxSize: 3 * 1024 * 1024,
+        // },
     });
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(2);
     const [open, setOpen] = useState(false);
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    const usersOnPage = allUsers.slice(startIndex, endIndex);
+
+    const lastRequestDate = localStorage.getItem("lastRequestDate");
+    const twentyFourHours = 24 * 60 * 60 * 1000; // 24 часа в миллисекундах
+
+    function handlePageChanger(page) {
+        setCurrentPage(page);
+    }
 
     const showDrawer = (e) => {
         e.preventDefault();
@@ -50,21 +67,32 @@ export default function Authenticated({
 
     const onClose = () => {
         setOpen(false);
-        route('dashboard');
+        route("dashboard");
     };
 
     const sumbitData = (e) => {
         e.preventDefault();
+
+        if (lastRequestDate) {
+            const now = new Date();
+            const lastRequest = new Date(lastRequestDate);
+            if (now - lastRequest < twentyFourHours) {
+                alert("Вы не можете отправлять запросы чаще, чем раз в сутки.");
+                return;
+            }
+        }
+
         post(route("dashboard.submit"), {
+            data: data,
             onSuccess: () => {
-                alert('Успешно!');
-                reset('title', 'message');
+                alert("Успешно!");
+                reset("title", "message");
+                localStorage.setItem("lastRequestDate", new Date());
             },
             onError: () => {
-                alert("Что-то пошло не так")
+                alert("Что-то пошло не так");
             },
         });
-        
     };
 
     return (
@@ -106,9 +134,13 @@ export default function Authenticated({
                                 </Button>
                             </Paragraph>
 
-
-                            <Edit mustVerifyEmail={mustVerifyEmail} open={open} auth={auth} status={status} onClose={onClose}/>
-
+                            <Edit
+                                mustVerifyEmail={mustVerifyEmail}
+                                open={open}
+                                auth={auth}
+                                status={status}
+                                onClose={onClose}
+                            />
 
                             <Alert
                                 message="Вы успешно вошли!"
@@ -128,7 +160,7 @@ export default function Authenticated({
                             <div className="admin__user-list">
                                 {allUsers ? (
                                     <>
-                                        {allUsers.map(
+                                        {usersOnPage.map(
                                             ({
                                                 client_id,
                                                 created_at,
@@ -144,31 +176,31 @@ export default function Authenticated({
                                                     className="main-user-card"
                                                     key={Math.random()}
                                                 >
-                                                    <p className="name">
-                                                        {client_name} id:
-                                                        {client_id}
-                                                    </p>
-                                                    <p className="mess">
-                                                        сообщение: {message}
-                                                    </p>
-                                                    <p>
+                                                    <Typography>
+                                                        <Paragraph>
+                                                            {client_name} id:
+                                                            {client_id}
+                                                        </Paragraph>
+                                                        <p className="mess">
+                                                            {message}
+                                                        </p>
                                                         <p>
-                                                            Аккаунт создан:{" "}
+                                                            Аккаунт создан:
                                                             {created_at}
                                                         </p>
                                                         <p>
-                                                            Время отправки:{" "}
+                                                            Время отправки:
                                                             {updated_at}
                                                         </p>
                                                         <p>
                                                             email:{" "}
                                                             {client_email}
                                                         </p>
-                                                        <p>
-                                                            Ссылка на файл:{" "}
+                                                        <p className="card-item">
+                                                            Ссылка на файл:
                                                             {file_link}
                                                         </p>
-                                                    </p>
+                                                    </Typography>
                                                 </Card>
                                             )
                                         )}
@@ -179,20 +211,29 @@ export default function Authenticated({
                             </div>
                             <div className="admin-pagination">
                                 <Pagination
-                                    defaultCurrent={1}
-                                    total={50}
+                                    current={currentPage}
+                                    total={allUsers.length}
+                                    pageSize={pageSize}
+                                    onChange={handlePageChanger}
+                                    onShowSizeChange={(current, size) => {
+                                        setPageSize(size);
+                                        setCurrentPage(1);
+                                    }}
                                 ></Pagination>
                             </div>
                         </div>
                     ) : (
                         <div className="client-dashboard">
                             <form
+                                enctype="multipart/form-data"
                                 className="upd-form"
                                 layout="horizontal"
                                 onSubmit={sumbitData}
                                 htmlType="form"
                             >
-                                <Title level={3}>Отправить запрос модератору:</Title>
+                                <Title level={3}>
+                                    Отправить запрос модератору:
+                                </Title>
                                 <Form.Item
                                     label="Заголовок"
                                     name="title"
@@ -200,6 +241,10 @@ export default function Authenticated({
                                         {
                                             required: true,
                                             message: "Please input title",
+                                        },
+                                        {
+                                            max: 255,
+                                            message: "Max length exceeded",
                                         },
                                     ]}
                                 >
@@ -219,7 +264,19 @@ export default function Authenticated({
                                     className="inp-error"
                                 />
 
-                                <Form.Item label="Сообщение:">
+                                <Form.Item
+                                    label="Сообщение:"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: "Please input title",
+                                        },
+                                        {
+                                            max: 255,
+                                            message: "Max length exceeded",
+                                        },
+                                    ]}
+                                >
                                     <TextArea
                                         rows={4}
                                         id="message"
@@ -236,19 +293,34 @@ export default function Authenticated({
                                     message={errors.message}
                                     className="inp-error"
                                 />
-                                <Form.Item
+                                {/* <Form.Item
                                     label="Upload"
                                     valuePropName="fileList"
                                     className="client-upload"
                                 >
                                     <Upload
-                                        action="/upload.do"
+                                        name="file"
+                                        action={route(Dashboard)}
                                         listType="picture-card"
+                                        onChange={(file) =>
+                                            setData("file", file.fileList[0])
+                                        }
+                                        beforeUpload={(file) => {
+                                            const isLt3M =
+                                                file.size / 1024 / 1024 < 3;
+                                            if (!isLt3M) {
+                                                message.error(
+                                                    "File must be smaller than 3MB!"
+                                                );
+                                                return false;
+                                            }
+                                            return true;
+                                        }}
                                     >
                                         <PlusOutlined />
                                         <p>Upload</p>
                                     </Upload>
-                                </Form.Item>
+                                </Form.Item> */}
 
                                 <Button
                                     htmlType="submit"
